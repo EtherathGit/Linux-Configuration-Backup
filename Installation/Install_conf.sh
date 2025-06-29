@@ -9,17 +9,13 @@ on_error() {
 # Register the trap
 trap on_error ERR
 
-# Set Current status
-CURRENT="initializing"
-
 # Define Backup Folder
-BACKUP_DIR=~/.FedoraConfiguration/_BackupFiles
+CURRENT="initializing"
+BACKUP_DIR=~/.ConfigurationBackup/_BackupFiles
 
 # List files to retore
-FILES=(
-  "$HOME/.p10k.zsh"
-  "$HOME/.zshrc"
-)
+CURRENT="load configuration files list"
+source "$HOME/.ConfigurationBackup/Ressources/ConfigurationFiles.sh"
 
 # Install listed files
 for FILE in "${FILES[@]}"; do
@@ -37,4 +33,4 @@ CURRENT="Installing VSCode Extensions"
 xargs -n1 code --install-extension < "$BACKUP_DIR/VSCode_entension.txt"
 
 # Done
-echo "✔️ Backup configuration files done"
+echo -e "\n✔️ \033[1;32mConfiguration files restored. \033[0m"

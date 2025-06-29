@@ -1,17 +1,30 @@
 #!bin/bash
 
+# Define the error handler
+on_error() {
+  echo "❌ Error occurred while $CURRENT"
+  exit 1
+}
+
+# Register the trap
+trap on_error ERR
+
 # Define Backup Folder
-BACKUP_DIR=~/.FedoraConfiguration/_BackupFiles
+CURRENT="initializing"
+BACKUP_DIR=~/.ConfigurationBackup/_BackupFiles
 
 # Install Zsh
+CURRENT="instaling Zsh"
 echo 'Install Zsh'
 sudo apt install zsh -y
 
-# Install OhMyZsh
-echo 'Install OhMyZsh (OMZ)'
+# Install Oh-My-Zsh
+CURRENT="instaling OMZ"
+echo 'Install Oh-My-Zsh (OMZ)'
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # Download fonts
+CURRENT="downloading fonts"
 echo 'Download fonts'
 mkdir -p ~/.fonts && cd ~/.fonts
 curl -LO https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf
@@ -20,30 +33,36 @@ curl -LO https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF
 curl -LO https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf
 
 # Install fonts
+CURRENT="installing fonts"
 echo 'Install fonts'
 command fc-cache || sudo apt install fontconfig -y
 fc-cache -f -v
 
 # Download Powerlevel10k
+CURRENT="downloading Powerlevel10k"
 echo 'Download Powerlevel10k'
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
 # Download plugins
+CURRENT="donwloading plugin zsh-z"
 echo 'Download zsh-z plugin'
-git clone https://github.com/agkozak/zsh-z.git $ZSH_CUSTOM/plugins/zsh-z
+git clone https://github.com/agkozak/zsh-z.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}//plugins/zsh-z
+CURRENT="donwloading plugin zsh-autosuggestions"
 echo 'Download zsh-autosuggestions plugin'
 git clone https://github.com/zsh-users/zsh-autosuggestions.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+CURRENT="donwloading plugin zsh-syntax-highlighting"
 echo 'Download zsh-syntax-highlighting plugin'
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-
-# Import custom plugins
-echo 'Install custom Updates plugin'
-cp -r "$BACKUP_DIR/.oh-my-zsh/custom/updates/" "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/"
+CURRENT="donwloading plugin zsh-updates"
+echo 'Download Updates plugin'
+git clone https://github.com/etherath/zsh-updates.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}//plugins/zsh-updates
 
 # Enable Powerlevel10k
+CURRENT="setting Powerlevel10k as theme"
 echo 'Set OMZ theme to Powerlevel10k'
 sed -i 's|^ZSH_THEME=.*|ZSH_THEME="powerlevel10k/powerlevel10k"|g' ~/.zshrc
 
 # Enable plugins
+CURRENT="enabling all plugins"
 echo 'Enable OMZ plugins'
-sed -i 's|^plugins=.*|plugins=(git zsh-z zsh-autosuggestions zsh-syntax-highlighting updates)|g' ~/.zshrc
+sed -i 's|^plugins=.*|plugins=(git zsh-z zsh-autosuggestions zsh-syntax-highlighting zsh-updates)|g' ~/.zshrc
