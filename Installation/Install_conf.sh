@@ -13,7 +13,7 @@ trap on_error ERR
 CURRENT="initializing"
 
 # Define Backup Folder
-BACKUP_DIR=~/.FedoraConfiguration/BackupFiles
+BACKUP_DIR=~/.FedoraConfiguration/_BackupFiles
 
 # List files to retore
 FILES=(

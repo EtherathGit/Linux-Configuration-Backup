@@ -1,7 +1,7 @@
 #!bin/bash
 
 # Define Backup Folder
-BACKUP_DIR=~/.FedoraConfiguration/BackupFiles
+BACKUP_DIR=~/.FedoraConfiguration/_BackupFiles
 
 # Install Zsh
 echo 'Install Zsh'
