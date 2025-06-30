@@ -16,7 +16,7 @@ echo "$(tput bold)==> Starting CLI installation...$(tput sgr0)"
 # Install Zsh
 CURRENT="instaling Zsh"
 echo 'Install Zsh'
-sudo apt install zsh -y
+sudo dnf install zsh -y
 
 # Install Oh-My-Zsh
 CURRENT="instaling OMZ"
@@ -35,7 +35,7 @@ curl -LO https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF
 # Install fonts
 CURRENT="installing fonts"
 echo 'Install fonts'
-command fc-cache || sudo apt install fontconfig -y
+command fc-cache || sudo dnf install fontconfig -y
 fc-cache -f -v
 
 # Download Powerlevel10k
