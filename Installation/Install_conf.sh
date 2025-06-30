@@ -2,7 +2,7 @@
 
 # Define the error handler
 on_error() {
-  echo "❌ Error occurred while processing: $CURRENT"
+  echo "$(tput bold)❌ Error occurred while $CURRENT$(tput sgr0)"
   exit 1
 }
 
@@ -11,11 +11,11 @@ trap on_error ERR
 
 # Define Backup Folder
 CURRENT="initializing"
-BACKUP_DIR=~/.ConfigurationBackup/_BackupFiles
+BACKUP_DIR="${CONF_DIR_CUSTOM:-$HOME/.ConfigurationBackup}/_BackupFiles"
 
 # List files to retore
-CURRENT="load configuration files list"
-source "$HOME/.ConfigurationBackup/Ressources/ConfigurationFiles.sh"
+CURRENT="loading configuration files list"
+source "${CONF_DIR_CUSTOM:-$HOME/.ConfigurationBackup}/Ressources/ConfigurationFiles.sh"
 
 # Install listed files
 for FILE in "${FILES[@]}"; do
@@ -24,13 +24,12 @@ for FILE in "${FILES[@]}"; do
 done
 
 # Install VSCode Profiles
-CURRENT="Installing VSCode Profiles"
-VSCODE_PATH="$HOME/.config/Code/User"
+CURRENT="installing VSCode Profiles"
 cp -r "$BACKUP_DIR$(dirname "$VSCODE_PATH")" "$VSCODE_PATH"
 
 # Install VSCode Extensions
-CURRENT="Installing VSCode Extensions"
+CURRENT="installing VSCode Extensions"
 xargs -n1 code --install-extension < "$BACKUP_DIR/VSCode_entension.txt"
 
 # Done
-echo -e "\n✔️ \033[1;32mConfiguration files restored. \033[0m"
+echo "$(tput bold)$(tput setaf 2)✓ Configuration files restored.$(tput sgr0)"

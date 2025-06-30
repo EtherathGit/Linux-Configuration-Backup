@@ -2,16 +2,16 @@
 
 # Define the error handler
 on_error() {
-  echo "❌ Error occurred while $CURRENT"
+  echo "$(tput bold)❌ Error occurred while $CURRENT$(tput sgr0)"
   exit 1
 }
 
 # Register the trap
 trap on_error ERR
 
-# Define Backup Folder
-CURRENT="initializing"
-BACKUP_DIR=~/.ConfigurationBackup/_BackupFiles
+# Starting
+CURRENT="starting"
+echo "$(tput bold)==> Starting CLI installation...$(tput sgr0)"
 
 # Install Zsh
 CURRENT="instaling Zsh"
@@ -46,7 +46,7 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$
 # Download plugins
 CURRENT="donwloading plugin zsh-z"
 echo 'Download zsh-z plugin'
-git clone https://github.com/agkozak/zsh-z.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}//plugins/zsh-z
+git clone https://github.com/agkozak/zsh-z.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-z
 CURRENT="donwloading plugin zsh-autosuggestions"
 echo 'Download zsh-autosuggestions plugin'
 git clone https://github.com/zsh-users/zsh-autosuggestions.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
@@ -55,7 +55,7 @@ echo 'Download zsh-syntax-highlighting plugin'
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 CURRENT="donwloading plugin zsh-updates"
 echo 'Download Updates plugin'
-git clone https://github.com/etherath/zsh-updates.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}//plugins/zsh-updates
+git clone https://github.com/EtherathGit/zsh-updates.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}//plugins/zsh-updates
 
 # Enable Powerlevel10k
 CURRENT="setting Powerlevel10k as theme"
@@ -66,3 +66,6 @@ sed -i 's|^ZSH_THEME=.*|ZSH_THEME="powerlevel10k/powerlevel10k"|g' ~/.zshrc
 CURRENT="enabling all plugins"
 echo 'Enable OMZ plugins'
 sed -i 's|^plugins=.*|plugins=(git zsh-z zsh-autosuggestions zsh-syntax-highlighting zsh-updates)|g' ~/.zshrc
+
+# Done
+echo "$(tput bold)$(tput setaf 2)✓ CLI installation done.$(tput sgr0)"
