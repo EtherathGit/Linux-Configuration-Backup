@@ -11,17 +11,7 @@ trap on_error ERR
 
 # Starting
 CURRENT="starting"
-echo "$(tput bold)==> Starting CLI installation...$(tput sgr0)"
-
-# Install Zsh
-CURRENT="instaling Zsh"
-echo 'Install Zsh'
-sudo dnf install zsh -y
-
-# Install Oh-My-Zsh
-CURRENT="instaling OMZ"
-echo 'Install Oh-My-Zsh (OMZ)'
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+echo "$(tput bold)==> Starting CLI complement installation...$(tput sgr0)"
 
 # Download fonts
 CURRENT="downloading fonts"
@@ -55,7 +45,7 @@ echo 'Download zsh-syntax-highlighting plugin'
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 CURRENT="donwloading plugin zsh-updates"
 echo 'Download Updates plugin'
-git clone https://github.com/EtherathGit/zsh-updates.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}//plugins/zsh-updates
+git clone https://github.com/EtherathGit/zsh-updates.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-updates
 
 # Enable Powerlevel10k
 CURRENT="setting Powerlevel10k as theme"

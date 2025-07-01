@@ -20,7 +20,7 @@ source "${CONF_DIR_CUSTOM:-$HOME/.ConfigurationBackup}/Ressources/ConfigurationF
 # Install listed files
 for FILE in "${FILES[@]}"; do
   CURRENT="restoring $FILE"
-  cp -u "$BACKUP_DIR$FILE" "$FILE"
+  cp -f "$BACKUP_DIR$FILE" "$FILE"
 done
 
 # Install VSCode Profiles

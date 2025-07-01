@@ -22,7 +22,7 @@ for FILE in "${FILES[@]}"; do
   CURRENT="copying $FILE"
   DEST="$BACKUP_DIR$(dirname "$FILE")"
   mkdir -p "$DEST"
-  cp -u "$FILE" "$DEST/"
+  cp -f "$FILE" "$DEST/"
 done
 
 # Backup VSCode Profiles
