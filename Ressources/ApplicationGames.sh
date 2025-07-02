@@ -1,7 +1,7 @@
 #!bin/bash
 
 # Define lists of apps to install per method
-DNF_APPS=("snap" "flatpak")
+DNF_APPS=("steam")
 SNAP_APPS=("code" "spotify")
 FLATPAK_APPS=("com.discordapp.Discord")
 RPM_URLS=(
